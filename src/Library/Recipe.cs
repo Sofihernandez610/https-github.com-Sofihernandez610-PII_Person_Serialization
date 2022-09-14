@@ -11,14 +11,36 @@ using System.Text.Json.Serialization;
 
 namespace Recipies
 {
-    public class Recipe
+    public class Recipe : IJsonConvertible
     {
         // private ArrayList steps = new ArrayList();
         public Product FinalProduct { get; set; }
 
         [JsonInclude]
         public ArrayList Steps { get; private set; } = new ArrayList();
+       public Recipe()
+       {
+        
+       }
 
+       public Recipe (string json)
+        {
+            this.LoadFromJson(json);
+        }
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+
+        public void LoadFromJson(string json)
+        {
+            Recipe deserialized = JsonSerializer.Deserialize<Recipe>(json);
+            this.Steps = deserialized.Steps;
+             this.FinalProduct = deserialized.FinalProduct;
+
+            
+        }
+        
 
         public void AddStep(Step step)
         {

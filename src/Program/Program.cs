@@ -24,8 +24,8 @@ namespace Recipies
             recipe.FinalProduct = GetProduct("Café con leche");
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
-
-            Console.WriteLine(recipe.ConvertToJson());
+            string json =recipe.ConvertToJson();
+            Console.WriteLine(json);
         }
 
         private static void PopulateCatalogs()
